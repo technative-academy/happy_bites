@@ -8,6 +8,10 @@
     margin-right: auto;
 }
 
+.about__h3 {
+    font-size: var(--font-size-heading);
+}
+
 .about__content,
 .about__tabs {
     font-size: var(--font-size-body);

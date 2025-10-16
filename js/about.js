@@ -1,6 +1,6 @@
 const aboutTabElements = document.querySelectorAll(".about__tab");
-const aboutAppTextElement = document.querySelector(".about__appText");
-const aboutTeamTextElement = document.querySelector(".about__teamText");
+const aboutAppTextElements = document.querySelectorAll(".about__appText");
+const aboutTeamTextElements = document.querySelectorAll(".about__teamText");
 // const aboutImageElements = document.querySelectorAll("about__image");
 
 const aboutAppImageElement = document.querySelector(".about__appImage");
@@ -15,8 +15,12 @@ function addListenerAboutTab(aboutTabElement) {
 function changeAboutPageContentText(event) {
     const currentElement = event.currentTarget;
     if (currentElement.classList.contains("about__tab-app")) {
-        aboutAppTextElement.classList.remove("about__appText-hidden");
-        aboutTeamTextElement.classList.remove("about__teamText-visible");
+        aboutAppTextElements[0].classList.remove("about__appText-hidden");
+        aboutAppTextElements[1].classList.remove("about__appText-hidden");
+
+        aboutTeamTextElements[0].classList.remove("about__teamText-visible");
+        aboutTeamTextElements[1].classList.remove("about__teamText-visible");
+
         aboutTabElements[0].classList.add("about__tab-selected");
         aboutTabElements[1].classList.remove("about__tab-selected");
 
@@ -24,8 +28,12 @@ function changeAboutPageContentText(event) {
         aboutAppImageElement.classList.remove("about__appImage-hidden");
         aboutTeamImageElement.classList.remove("about__teamImage-visible");
     } else if (currentElement.classList.contains("about__tab-team")) {
-        aboutAppTextElement.classList.add("about__appText-hidden");
-        aboutTeamTextElement.classList.add("about__teamText-visible");
+        aboutAppTextElements[0].classList.add("about__appText-hidden");
+        aboutAppTextElements[1].classList.add("about__appText-hidden");
+
+        aboutTeamTextElements[0].classList.add("about__teamText-visible");
+        aboutTeamTextElements[1].classList.add("about__teamText-visible");
+
         aboutTabElements[0].classList.remove("about__tab-selected");
         aboutTabElements[1].classList.add("about__tab-selected");
 
