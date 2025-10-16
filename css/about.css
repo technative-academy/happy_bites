@@ -1,0 +1,70 @@
+:root {
+    --about-tab-border-color: grey;
+}
+
+.about__tabs {
+    display: flex;
+    justify-content: center;
+}
+
+.about__tab {
+    padding: var(--spacing-m);
+}
+
+.about__tab-selected {
+    border-top: 1px solid grey;
+    border-right: 1px solid grey;
+    border-left: 1px solid grey;
+    border-bottom: none;
+}
+
+.about__content {
+    padding: var(--spacing-m);
+    justify-content: center;
+}
+
+/* image */
+
+.about__image {
+    padding: var(--spacing-m);
+    aspect-ratio: 2 / 1;
+    width: 100%;
+    object-fit: cover;
+}
+
+.about__appImage {
+    display: block;
+}
+
+.about__appImage-hidden {
+    display: none;
+}
+
+.about__teamImage {
+    display: none;
+}
+
+.about__teamImage-visible {
+    display: block;
+}
+
+/* about app and team text content */
+
+/* app text - default display is block*/
+
+.about__appText {
+    display: block;
+}
+
+.about__appText-hidden {
+    display: none;
+}
+
+/* team text - default display is none*/
+.about__teamText {
+    display: none;
+}
+
+.about__teamText-visible {
+    display: block;
+}

@@ -1,39 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About | Ask the Brains</title>
-    <link rel="stylesheet" href="../css/style.css" />
-    <script type="module" defer src="../js/script.js"></script>
-  </head>
-  <body>
-    <header class="header">
-      <div class="header__content">
-        <div class="header__logo">
-          <img src="../images/logo.png" alt="Ask the brains" />
-        </div>
-        <nav class="header__nav">
-          <a href="../" class="header__link">Home</a>
-          <a href="./" class="header__link header__link--active">About</a>
-          <a href="../ask/" class="header__link">Ask</a>
-          <a href="../shop/" class="header__link">Shop</a>
-        </nav>
-      </div>
-      <div class="header__titles">
-        <h1 class="header__title">About the brains</h1>
-        <p class="header__subtitle">...</p>
-      </div>
-    </header>
-    <main class="main">
-      <p>...</p>
-    </main>
-    <footer class="footer">
-      <p class="footer__links">
-        <a href="#" class="footer__link">Terms and Conditions</a> |
-        <a href="#" class="footer__link">Cookies</a>
-      </p>
-      <p class="footer__copyright">&copy; 202x</p>
-    </footer>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>About | Ask the Brains</title>
+        <link rel="stylesheet" href="../css/style.css" />
+        <script type="module" defer src="../js/script.js"></script>
+        <script defer src="../js/about.js"></script>
+    </head>
+    <body>
+        <header class="header">
+            <div class="header__content">
+                <div class="header__logo">
+                    <img src="../images/logo.png" alt="Ask the brains" />
+                </div>
+                <nav class="header__nav">
+                    <a href="../" class="header__link">Home</a>
+                    <a href="./" class="header__link header__link--active"
+                        >About</a
+                    >
+                    <a href="../ask/" class="header__link">Ask</a>
+                    <a href="../shop/" class="header__link">Shop</a>
+                </nav>
+            </div>
+            <div class="header__titles">
+                <h1 class="header__title">About the brains</h1>
+                <p class="header__subtitle">
+                    Who we are, what we do, why we are, where we do
+                </p>
+            </div>
+        </header>
+        <main class="main">
+            <div class="about__tabs">
+                <div class="about__tab about__tab-app about__tab-selected">
+                    About the app
+                </div>
+                <div class="about__tab about__tab-team">About the team</div>
+            </div>
+            <div class="about__content">
+                <img
+                    src="../images/about-page-happy-bites.png"
+                    class="about__image about__appImage"
+                />
+
+                <img
+                    src="../images/about-page-team.png"
+                    class="about__image about__teamImage"
+                />
+
+                <p class="about__appText">
+                    Information about the app. Lorem, ipsum dolor sit amet
+                    consectetur adipisicing elit. Corporis, eos culpa eveniet
+                    quis, dicta rerum saepe quos rem, nulla illo commodi tempora
+                    similique ullam mollitia iste earum voluptas ipsam alias?
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Corporis, eos culpa eveniet quis, dicta rerum saepe quos
+                    rem, nulla illo commodi tempora similique ullam mollitia
+                    iste earum voluptas ipsam alias? Lorem, ipsum dolor sit amet
+                    consectetur adipisicing elit. Corporis, eos culpa eveniet
+                    quis, dicta rerum saepe quos rem, nulla illo commodi tempora
+                    similique ullam mollitia iste earum voluptas ipsam alias?
+                </p>
+
+                <p class="about__teamText">
+                    Information about the team. Lorem, ipsum dolor sit amet
+                    consectetur adipisicing elit. Corporis, eos culpa eveniet
+                    quis, dicta rerum saepe quos rem, nulla illo commodi tempora
+                    similique ullam mollitia iste earum voluptas ipsam alias?
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Corporis, eos culpa eveniet quis, dicta rerum saepe quos
+                    rem, nulla illo commodi tempora similique ullam mollitia
+                    iste earum voluptas ipsam alias? Lorem, ipsum dolor sit amet
+                    consectetur adipisicing elit. Corporis, eos culpa eveniet
+                    quis, dicta rerum saepe quos rem, nulla illo commodi tempora
+                    similique ullam mollitia iste earum voluptas ipsam alias?
+                </p>
+            </div>
+        </main>
+        <footer class="footer">
+            <p class="footer__links">
+                <a href="#" class="footer__link">Terms and Conditions</a> |
+                <a href="#" class="footer__link">Cookies</a>
+            </p>
+            <p class="footer__copyright">&copy; 2025</p>
+        </footer>
+    </body>
 </html>
