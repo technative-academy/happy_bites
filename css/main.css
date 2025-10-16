@@ -1,10 +1,55 @@
 .main {
-  padding: var(--spacing-l);
-  max-width: var(--width-max);
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: calc(-1 * var(--spacing-xl));
-  background: var(--colour-background-white);
-  border-radius: var(--border-radius-l);
-  box-shadow: var(--box-shadow);
+    padding: var(--spacing-l);
+    max-width: var(--width-max);
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: calc(-1 * var(--spacing-xl));
+    background: var(--colour-background-white);
+    border-radius: var(--border-radius-l);
+    box-shadow: var(--box-shadow);
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.home__title {
+    margin: 2rem 0 0 0;
+    padding: 0;
+    font-size: var(--font-size-heading);
+}
+
+.home__subtitle {
+    margin: 0 0 1rem 0;
+    padding: 0;
+    font-size: var(--font-size-subheading);
+    color: var(--colour-primary);
+}
+
+.home__text {
+    margin: 0;
+    padding: 0;
+    font-size: 1.5rem;
+    color: grey;
+}
+
+.home__text-align {
+    text-align: center;
+    margin: 2rem 0 1rem 0;
+}
+
+.home__image {
+    margin: 2rem 0 0 0;
+    width: 80%;
+    align-self: center;
+}
+
+.home__button {
+    width: 60%;
+    align-self: center;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
 }
