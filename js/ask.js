@@ -1,5 +1,6 @@
 class Ask {
     maxLength = 160;
+    currentQuery = "";
 
     constructor() {
         this.askContainer = document.querySelector(".ask");
@@ -10,6 +11,7 @@ class Ask {
             );
             this.askButton =
                 this.askContainer.querySelector(".ask__button-ask");
+            //resetButton is the ask a new question button
             this.resetButton =
                 this.askContainer.querySelector(".ask__button-reset");
             this.charCounter =
@@ -19,6 +21,8 @@ class Ask {
             this.resultsContainer = document.querySelector(".results");
             this.resultsList =
                 this.resultsContainer.querySelector(".results__list");
+            this.showMoreButton =
+                this.resultsContainer.querySelector(".ask__button-show");
         }
     }
 
@@ -28,6 +32,7 @@ class Ask {
         this.exampleButton.addEventListener("click", (e) => this.setExample(e));
         this.askButton.addEventListener("click", (e) => this.askClicked(e));
         this.resetButton.addEventListener("click", (e) => this.resetClicked(e));
+        this.showMoreButton.addEventListener("click", (e) => this.showMore(e));
         this.checkInput();
     }
 
@@ -52,8 +57,8 @@ class Ask {
         }
     }
 
-    setExample(event) {
-        event.preventDefault();
+    setExample(e) {
+        e.preventDefault();
         console.log("setting example");
         this.askInput.value =
             "Tell me about some of the best things I could see with a telescope from Brighton (assuming it ever stops raining)";
@@ -71,9 +76,12 @@ class Ask {
 
         this.loading.classList.add("is-loading");
 
-        const query = this.askInput.value.split(" ").join("+").toLowerCase();
-
-        // add fetch url here
+        // If input value is not current query, update currentQuery.
+        if (!this.currentQuery || event) {
+            this.currentQuery = this.askInput.value.trim().toLowerCase();
+        }
+        // making query correct format
+        const query = this.currentQuery.split(" ").join("+").toLowerCase();
 
         const url = `https://ai-project.technative.dev.f90.co.uk/ai/happybites/?query=${query}`;
         try {
@@ -90,8 +98,23 @@ class Ask {
                 const json = await response.json();
                 const data = json.results;
 
+                // To ensure results are not cleared when showMoreButton is clicked
+                if (event.target !== this.showMoreButton) {
+                    this.clearResults();
+                }
+
                 this.processResults(data);
+
                 this.loading.classList.remove("is-loading");
+
+                this.resetButton.classList.remove("is-hidden");
+                this.resetButton.classList.add("is-visible");
+
+                if (data.length > 0) {
+                    this.resultsContainer.classList.add("is-shown");
+                } else {
+                    this.resultsContainer.classList.remove("is-shown");
+                }
             }, 1000);
         } catch (error) {
             console.error(error.message);
@@ -99,16 +122,18 @@ class Ask {
         }
     }
 
-    processResults(data) {
-        if (data.length > 0) {
-            this.resultsContainer.classList.add("is-shown");
-        } else {
-            this.resultsContainer.classList.remove("is-shown");
-        }
+    // Calling the askClicked function
+    showMore(event) {
+        event.preventDefault();
+        this.askClicked(event);
+    }
 
-        //assign id to resultsItem
+    // To clear results
+    clearResults() {
         this.resultsList.innerHTML = "";
+    }
 
+    processResults(data) {
         data.forEach((result) => {
             const resultsItem = document.createElement("div");
             resultsItem.classList.add("results__item");
