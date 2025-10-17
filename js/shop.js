@@ -20,7 +20,12 @@ class Shop {
 
     init() {
         if (!this.searchContainer) return;
-        this.searchInput.addEventListener("input", (e) => this.checkInput(e));
+        let debounceTimeout;
+        this.searchInput.addEventListener("input", (e) => {
+            this.checkInput(e);
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => this.search(), 500);
+        });
         this.searchButton.addEventListener("click", (e) => this.search(e));
         this.checkInput();
         this.search();
@@ -41,8 +46,6 @@ class Shop {
             this.productsList.removeChild(this.productsList.lastChild);
         }
 
-        const query = this.searchInput.value;
-
         const url = `https://ai-project.technative.dev.f90.co.uk/products/happybites`;
         try {
             const response = await fetch(url);
@@ -50,16 +53,11 @@ class Shop {
                 throw new Error(`Response status: ${response.status}`);
             }
 
-            await new Promise((resolve) =>
-                setTimeout(async () => {
-                    const json = await response.json();
-                    const data = json.products;
-                    console.log(data);
-                    this.processProducts(data);
-                    this.loading.classList.remove("is-loading");
-                    resolve();
-                }, 1000)
-            );
+            const json = await response.json();
+            const data = json.products;
+            console.log(data);
+            this.processProducts(data);
+            this.loading.classList.remove("is-loading");
         } catch (error) {
             console.error(error.message);
             this.loading.classList.remove("is-loading");
