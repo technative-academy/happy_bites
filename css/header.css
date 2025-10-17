@@ -1,9 +1,16 @@
 /* Header */
 .header {
-    background: linear-gradient(
+    /* background: linear-gradient(
         to bottom left,
         var(--colour-primary),
         var(--colour-secondary)
+    ); */
+    background: #dea4d5;
+    background: linear-gradient(
+        37deg,
+        rgba(222, 164, 213, 1) 0%,
+        rgba(199, 87, 195, 1) 51%,
+        rgba(237, 83, 121, 1) 100%
     );
     color: var(--colour-text-light);
     padding-top: var(--spacing-xl);
@@ -11,7 +18,7 @@
 }
 
 .header__content {
-    max-width: var(--width-max);
+    /* max-width: var(--width-max); */
     display: flex;
     flex-direction: row;
     margin: 0 auto;
@@ -19,16 +26,33 @@
     align-items: center;
     /* padding: var(--spacing-l); */
     padding: 0 1rem;
-}
 
-@media (min-width: 800px) {
-    .header__content {
+    @media (min-width: 600px) {
+        padding: 0 3rem;
+    }
+
+    @media (min-width: 900px) {
+        padding: 0 4rem;
         flex-direction: row;
+    }
+
+    @media (min-width: 1200px) {
+        padding: 0 2rem;
+        /* margin: 0 4rem; */
+        /* width: 100%; */
     }
 }
 
 .header__logo {
-    width: 60%;
+    width: 40%;
+
+    @media (min-width: 900px) {
+        width: 20%;
+    }
+
+    @media (min-width: 1200px) {
+        width: 15%;
+    }
 }
 
 .burger__menu {
@@ -36,6 +60,10 @@
     flex-direction: row;
     align-items: center;
     font-size: 0.75rem;
+
+    @media (min-width: 600px) {
+        display: none;
+    }
 }
 
 .burger__label {
@@ -54,9 +82,17 @@
     top: 0;
     left: 0;
     display: none;
+
+    @media (min-width: 600px) {
+        display: none;
+    }
 }
 .burger-active {
     display: block;
+
+    @media (min-width: 600px) {
+        display: none;
+    }
 }
 .burger__links {
     display: flex;
@@ -98,15 +134,18 @@
 /* header nav */
 
 .header__nav {
-    border-bottom: 1px solid var(--colour-text-light);
+    /* border-bottom: 1px solid var(--colour-text-light); */
     padding-bottom: 5px;
     display: flex;
     gap: var(--spacing-l);
     margin-top: var(--spacing-l);
-}
+    display: none;
 
-@media (min-width: 800px) {
-    .header__nav {
+    @media (min-width: 600px) {
+        display: flex;
+    }
+
+    @media (min-width: 800px) {
         margin-top: 0;
     }
 }
@@ -118,7 +157,7 @@
 }
 
 .header__link::after {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     bottom: -5px;
@@ -140,6 +179,17 @@
     padding-left: var(--spacing-l);
     padding-right: var(--spacing-l);
     text-align: center;
+
+    @media (min-width: 1000px) {
+        margin: 6rem auto 4rem auto;
+        width: 60%;
+    }
+
+    @media (min-width: 1200px) {
+        width: 100%;
+        margin: 6rem 0 4rem 0;
+        padding: 0;
+    }
 }
 
 .header__title {

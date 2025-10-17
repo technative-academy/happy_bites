@@ -1,12 +1,30 @@
 .main {
     padding: var(--spacing-l);
-    max-width: var(--width-max);
+    /* max-width: var(--width-max); */
     margin-left: 1rem;
     margin-right: 1rem;
     margin-top: calc(-1 * var(--spacing-xl));
     background: var(--colour-background-white);
     border-radius: var(--border-radius-l);
     box-shadow: var(--box-shadow);
+
+    @media (min-width: 600px) {
+        padding: 3rem;
+        margin-right: 2rem;
+        margin-left: 2rem;
+    }
+
+    @media (min-width: 800px) {
+        padding: 4rem;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    @media (min-width: 1200px) {
+        margin-left: 2rem;
+        margin-right: 2rem;
+        padding: 4rem;
+    }
 }
 
 .home {
@@ -15,10 +33,33 @@
     text-align: left;
 }
 
+.home__intro {
+    @media (min-width: 1200px) {
+        display: flex;
+        flex-direction: row;
+        /* justify-content: space-between; */
+        align-items: center;
+        margin: 0 0 2rem 0;
+    }
+}
+
+.home__text-wrapper {
+    @media (min-width: 1200px) {
+        display: flex;
+        flex-direction: column;
+        margin: 0 1rem 0 0;
+    }
+}
+
 .home__title {
     margin: 2rem 0 0 0;
     padding: 0;
     font-size: var(--font-size-heading);
+
+    @media (min-width: 1200px) {
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
 }
 
 .home__subtitle {
@@ -27,6 +68,11 @@
     font-size: var(--font-size-subheading);
     font-weight: 200;
     color: var(--colour-primary);
+
+    @media (min-width: 1200px) {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
 }
 
 .home__text {
@@ -39,12 +85,51 @@
 .home__text-align {
     text-align: center;
     margin: 2rem 0 1rem 0;
+
+    @media (min-width: 1200px) {
+        /* text-align: left; */
+        padding: 0 0 1rem 0;
+    }
 }
 
 .home__image {
     margin: 2rem 0 0 0;
-    width: 80%;
+    width: 100%;
     align-self: center;
+    border-radius: var(--border-radius-m);
+
+    @media (min-width: 1200px) {
+        width: 50%;
+        margin: 0 0 0 1rem;
+    }
+}
+
+.home__actions {
+    @media (min-width: 1200px) {
+        display: flex;
+        flex-direction: row;
+        margin: 2rem 0 0 0;
+    }
+}
+
+.home__action {
+    @media (min-width: 1200px) {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+.home__action:first-child {
+    @media (min-width: 1200px) {
+        margin: 0 1rem 0 0;
+    }
+}
+
+.home__action:last-child {
+    @media (min-width: 1200px) {
+        margin: 0 0 0 1rem;
+    }
 }
 
 .home__button {
@@ -53,4 +138,8 @@
     text-align: center;
     font-weight: 600;
     font-size: 1rem;
+
+    @media (min-width: 1200px) {
+        width: 60%;
+    }
 }
