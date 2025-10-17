@@ -1,7 +1,7 @@
 /* Variables */
 :root {
-    --colour-primary: #6200ea;
-    --colour-secondary: #ff0080;
+    --colour-primary: #dea4d5;
+    --colour-secondary: #ed5379;
     --colour-background-white: white;
     --colour-background-light: #f0f0f0;
     --colour-background-dark: black;
@@ -38,10 +38,9 @@
 }
 
 /* General Styles */
-body h1 h2 h3 h4 h5 h6 {
+body {
     font-family: var(--font-family-body);
     margin: 0;
     padding: 0;
     text-align: center;
-    line-height: 0;
 }
