@@ -115,6 +115,7 @@ class Ask {
                 } else {
                     this.resultsContainer.classList.remove("is-shown");
                 }
+                this.updateResultsDisplay(data);
             }, 1000);
         } catch (error) {
             console.error(error.message);
@@ -149,6 +150,19 @@ class Ask {
             resultsItemDescription.textContent = result.description;
             resultsItem.appendChild(resultsItemDescription);
         });
+    }
+
+    updateResultsDisplay(data) {
+        this.loading.classList.remove("is-loading");
+
+        this.resetButton.classList.remove("is-hidden");
+        this.resetButton.classList.add("is-visible");
+
+        if (data.length > 0) {
+            this.resultsContainer.classList.add("is-shown");
+        } else {
+            this.resultsContainer.classList.remove("is-shown");
+        }
     }
 }
 
