@@ -21,6 +21,7 @@ class Shop {
     init() {
         if (!this.searchContainer) return;
         let debounceTimeout;
+        // allowing search to happen when user types. But delaying it enough that it doesn't overwhelm the api.
         this.searchInput.addEventListener("input", (e) => {
             this.checkInput(e);
             clearTimeout(debounceTimeout);
@@ -46,6 +47,7 @@ class Shop {
             this.productsList.removeChild(this.productsList.lastChild);
         }
 
+        // The API url
         const url = `https://ai-project.technative.dev.f90.co.uk/products/happybites`;
         try {
             const response = await fetch(url);
@@ -54,8 +56,10 @@ class Shop {
             }
 
             const json = await response.json();
+            // saving the products to a data variable
             const data = json.products;
-            console.log(data);
+
+            // passing data down to proccessProducts
             this.processProducts(data);
             this.loading.classList.remove("is-loading");
         } catch (error) {
@@ -89,6 +93,7 @@ class Shop {
             const productsItemImage = document.createElement("img");
             productsItemImage.classList.add("products__item-image");
             productsItemImage.src = `https://ai-project.technative.dev.f90.co.uk${product.image}`;
+            productsItemImage.alt = `A photo of ${product.title}`;
             productsItem.appendChild(productsItemImage);
 
             const productsItemTitle = document.createElement("h3");
