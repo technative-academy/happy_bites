@@ -20,7 +20,13 @@ class Shop {
 
     init() {
         if (!this.searchContainer) return;
-        this.searchInput.addEventListener("input", (e) => this.checkInput(e));
+        let debounceTimeout;
+        // allowing search to happen when user types. But delaying it enough that it doesn't overwhelm the api.
+        this.searchInput.addEventListener("input", (e) => {
+            this.checkInput(e);
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => this.search(), 500);
+        });
         this.searchButton.addEventListener("click", (e) => this.search(e));
         this.checkInput();
         this.search();
@@ -41,18 +47,21 @@ class Shop {
             this.productsList.removeChild(this.productsList.lastChild);
         }
 
-        const url = "../js/fake-products.json";
+        // The API url
+        const url = `https://ai-project.technative.dev.f90.co.uk/products/happybites`;
         try {
             const response = await fetch(url);
             if (!response.ok) {
                 throw new Error(`Response status: ${response.status}`);
             }
 
-            await setTimeout(async () => {
-                const json = await response.json();
-                this.processProducts(json);
-                this.loading.classList.remove("is-loading");
-            }, 1000);
+            const json = await response.json();
+            // saving the products to a data variable
+            const data = json.products;
+
+            // passing data down to proccessProducts
+            this.processProducts(data);
+            this.loading.classList.remove("is-loading");
         } catch (error) {
             console.error(error.message);
             this.loading.classList.remove("is-loading");
@@ -76,13 +85,15 @@ class Shop {
         }
 
         filteredProducts.forEach((product) => {
+            console.log(product.image);
             const productsItem = document.createElement("div");
             productsItem.classList.add("products__item");
             this.productsList.appendChild(productsItem);
 
             const productsItemImage = document.createElement("img");
             productsItemImage.classList.add("products__item-image");
-            productsItemImage.src = product.img;
+            productsItemImage.src = `https://ai-project.technative.dev.f90.co.uk${product.image}`;
+            productsItemImage.alt = `A photo of ${product.title}`;
             productsItem.appendChild(productsItemImage);
 
             const productsItemTitle = document.createElement("h3");
@@ -102,7 +113,7 @@ class Shop {
 
             const productsItemPrice = document.createElement("p");
             productsItemPrice.classList.add("products__item-price");
-            productsItemPrice.textContent = product.price;
+            productsItemPrice.textContent = `£${product.price}`;
             productsItem.appendChild(productsItemPrice);
         });
     }
