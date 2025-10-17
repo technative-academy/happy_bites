@@ -41,18 +41,25 @@ class Shop {
             this.productsList.removeChild(this.productsList.lastChild);
         }
 
-        const url = "../js/fake-products.json";
+        const query = this.searchInput.value;
+
+        const url = `https://ai-project.technative.dev.f90.co.uk/products/happybites`;
         try {
             const response = await fetch(url);
             if (!response.ok) {
                 throw new Error(`Response status: ${response.status}`);
             }
 
-            await setTimeout(async () => {
-                const json = await response.json();
-                this.processProducts(json);
-                this.loading.classList.remove("is-loading");
-            }, 1000);
+            await new Promise((resolve) =>
+                setTimeout(async () => {
+                    const json = await response.json();
+                    const data = json.products;
+                    console.log(data);
+                    this.processProducts(data);
+                    this.loading.classList.remove("is-loading");
+                    resolve();
+                }, 1000)
+            );
         } catch (error) {
             console.error(error.message);
             this.loading.classList.remove("is-loading");
@@ -76,13 +83,14 @@ class Shop {
         }
 
         filteredProducts.forEach((product) => {
+            console.log(product.image);
             const productsItem = document.createElement("div");
             productsItem.classList.add("products__item");
             this.productsList.appendChild(productsItem);
 
             const productsItemImage = document.createElement("img");
             productsItemImage.classList.add("products__item-image");
-            productsItemImage.src = product.img;
+            productsItemImage.src = `https://ai-project.technative.dev.f90.co.uk${product.image}`;
             productsItem.appendChild(productsItemImage);
 
             const productsItemTitle = document.createElement("h3");
@@ -102,7 +110,7 @@ class Shop {
 
             const productsItemPrice = document.createElement("p");
             productsItemPrice.classList.add("products__item-price");
-            productsItemPrice.textContent = product.price;
+            productsItemPrice.textContent = `£${product.price}`;
             productsItem.appendChild(productsItemPrice);
         });
     }
