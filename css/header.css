@@ -5,6 +5,8 @@
         var(--colour-primary),
         var(--colour-secondary)
     ); */
+    max-width: 1200px;
+    margin: 0 auto;
     background: #dea4d5;
     background: linear-gradient(
         37deg,
@@ -82,11 +84,8 @@
     top: 0;
     left: 0;
     display: none;
-
-    @media (min-width: 600px) {
-        display: none;
-    }
 }
+
 .burger-active {
     display: block;
 
