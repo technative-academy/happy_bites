@@ -43,6 +43,14 @@
     pointer-events: none;
 }
 
+.ask__button-reset.is-hidden {
+    display: none;
+}
+
+.ask__button-reset.is-visible {
+    display: inline-block;
+}
+
 .ask__footer {
     margin-top: var(--spacing-l);
 }
