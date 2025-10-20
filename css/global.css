@@ -3,10 +3,10 @@
     --colour-primary: #dea4d5;
     --colour-secondary: #ed5379;
     --colour-background-white: white;
-    --colour-background-light: #f0f0f0;
+    --colour-background-light: #f9edf7;
     --colour-background-dark: black;
-    --colour-text-light: white;
-    --colour-text-dark: black;
+    --colour-text-light: #fbfcf8;
+    --colour-text-dark: #18191a;
 
     --width-max: 800px;
 
@@ -22,8 +22,7 @@
     --font-size-body: 16px;
     --font-size-small: 12px;
     --font-weight-bold: bold;
-    --font-family-body: Arial, sans-serif;
-
+    --font-family-body: "Montserrat", sans-serif;
     --border-radius-s: 5px;
     --border-radius-m: 10px;
     --border-radius-l: 20px;
