@@ -59,6 +59,7 @@ class Shop {
 
         const pageSize = 5;
 
+        // resetting page to 1, to allow items to be sorted
         const sort = this.sortInput.value;
         if (sort !== this.currentSort) {
             this.currentSort = sort;
@@ -109,6 +110,7 @@ class Shop {
         }
     }
 
+    //using API filtering abilities to reverse for the additional sort
     shouldReverseResults(sort, APIsort) {
         if (APIsort === "title" && sort === "title-z-a") {
             return true;
@@ -132,6 +134,7 @@ class Shop {
     }
 
     processProducts(data, reverseResults = false) {
+        //using API filtering abilities to reverse for the additional sort
         let productsData = data;
         if (reverseResults) {
             productsData = productsData.reverse();
