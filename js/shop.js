@@ -1,7 +1,9 @@
 class Shop {
     constructor() {
+        // keeping track of search parameters
         this.currentPage = 1;
         this.currentSort = "title-a-z";
+        this.currentSearch = "";
         this.results = [];
         this.searchContainer = document.querySelector(".search");
         if (this.searchContainer) {
@@ -50,25 +52,31 @@ class Shop {
         if (e) e.preventDefault();
 
         this.loading.classList.add("is-loading");
-        this.productsContainer.classList.remove("is-shown");
         this.searchResultCount.textContent = "";
-
-        while (this.productsList.firstChild) {
-            this.productsList.removeChild(this.productsList.lastChild);
-        }
 
         const pageSize = 5;
 
-        // resetting page to 1, to allow items to be sorted
         const sort = this.sortInput.value;
-        if (sort !== this.currentSort) {
-            this.currentSort = sort;
+        const sortChanged = sort !== this.currentSort;
+        const search = this.searchInput.value;
+        const searchChanged = search !== this.currentSearch;
+        // resetting state when search or sort changes
+        if (sortChanged || searchChanged) {
             this.currentPage = 1;
             this.results = [];
             this.showMoreButton.classList.remove("is-hidden");
             this.showMoreButton.classList.add("is-visible");
         }
+        this.currentSort = sort;
+        this.currentSearch = search;
+        // the sort value to be used in the api url
         const APIsort = this.getAPISortValue(sort);
+
+        // hiding show more button if page is greater than 1
+        if (this.currentPage > 1) {
+            this.showMoreButton.classList.add("is-hidden");
+            this.showMoreButton.classList.remove("is-visible");
+        }
 
         // The API url
         const url = `https://ai-project.technative.dev.f90.co.uk/products/happybites?sort=${APIsort}&page-size=${pageSize}&page=${this.currentPage}`;
@@ -79,7 +87,7 @@ class Shop {
             }
 
             const json = await response.json();
-            // saving the products to this.results
+            // handling pagiation
             if (this.currentPage === 1) {
                 this.results = json.products;
             } else {
@@ -98,6 +106,7 @@ class Shop {
         }
     }
 
+    //converting sort value to api equivalent
     getAPISortValue(sort) {
         if (sort === "title-a-z" || sort === "title-z-a") {
             return "title";
@@ -110,7 +119,7 @@ class Shop {
         }
     }
 
-    //using API filtering abilities to reverse for the additional sort
+    //checking if api supports current sort
     shouldReverseResults(sort, APIsort) {
         if (APIsort === "title" && sort === "title-z-a") {
             return true;
@@ -124,17 +133,13 @@ class Shop {
         return false;
     }
 
+    // loading more products
     moreResults() {
         this.currentPage += 1;
         this.search();
-
-        if (this.currentPage === 2) {
-            this.showMoreButton.classList.add("is-hidden");
-        }
     }
 
-    processProducts(data, reverseResults = false) {
-        //using API filtering abilities to reverse for the additional sort
+    processProducts(data, reverseResults) {
         let productsData = data;
         if (reverseResults) {
             productsData = productsData.reverse();
@@ -152,6 +157,10 @@ class Shop {
             this.productsContainer.classList.add("is-shown");
         } else {
             this.productsContainer.classList.remove("is-shown");
+        }
+
+        while (this.productsList.firstChild) {
+            this.productsList.removeChild(this.productsList.lastChild);
         }
 
         filteredProducts.forEach((product) => {
