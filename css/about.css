@@ -1,5 +1,5 @@
 :root {
-    --about-tab-border-color: grey;
+    --about-tab-border: 1px solid grey;
 }
 
 .about__main {
@@ -25,12 +25,13 @@
 
 .about__tab {
     padding: var(--spacing-m);
+    border-bottom: var(--about-tab-border);
 }
 
 .about__tab-selected {
-    border-top: 1px solid grey;
-    border-right: 1px solid grey;
-    border-left: 1px solid grey;
+    border-top: var(--about-tab-border);
+    border-right: var(--about-tab-border);
+    border-left: var(--about-tab-border);
     border-bottom: none;
 }
 
@@ -48,39 +49,15 @@
     object-fit: cover;
 }
 
-.about__appImage {
+/* app css classes for both image and text */
+.about__app {
     display: block;
 }
 
-.about__appImage-hidden {
-    display: none;
-}
-
-.about__teamImage {
-    display: none;
-}
-
-.about__teamImage-visible {
+.about__visible {
     display: block;
 }
 
-/* about app and team text content */
-
-/* app text - default display is block*/
-
-.about__appText {
-    display: block;
-}
-
-.about__appText-hidden {
+.about__hidden {
     display: none;
-}
-
-/* team text - default display is none*/
-.about__teamText {
-    display: none;
-}
-
-.about__teamText-visible {
-    display: block;
 }

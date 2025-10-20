@@ -1,44 +1,49 @@
-const aboutTabElements = document.querySelectorAll(".about__tab");
-const aboutAppTextElements = document.querySelectorAll(".about__appText");
-const aboutTeamTextElements = document.querySelectorAll(".about__teamText");
-// const aboutImageElements = document.querySelectorAll("about__image");
+const aboutTabs = document.querySelectorAll(".about__tab");
+const aboutApps = document.querySelectorAll(".about__app");
+const aboutDishes = document.querySelectorAll(".about__dish");
 
-const aboutAppImageElement = document.querySelector(".about__appImage");
-const aboutTeamImageElement = document.querySelector(".about__teamImage");
+aboutTabs.forEach(AddTabListener);
 
-aboutTabElements.forEach(addListenerAboutTab);
-
-function addListenerAboutTab(aboutTabElement) {
-    aboutTabElement.addEventListener("click", changeAboutPageContentText);
+function AddTabListener(tabElement) {
+    tabElement.addEventListener("click", updatePage);
 }
 
-function changeAboutPageContentText(event) {
-    const currentElement = event.currentTarget;
-    if (currentElement.classList.contains("about__tab-app")) {
-        aboutAppTextElements[0].classList.remove("about__appText-hidden");
-        aboutAppTextElements[1].classList.remove("about__appText-hidden");
+function updatePage(event) {
+    const clickedTab = event.currentTarget;
 
-        aboutTeamTextElements[0].classList.remove("about__teamText-visible");
-        aboutTeamTextElements[1].classList.remove("about__teamText-visible");
+    if (clickedTab.classList.contains("about__app")) {
+        // display app elements
+        aboutApps.forEach(showElements);
 
-        aboutTabElements[0].classList.add("about__tab-selected");
-        aboutTabElements[1].classList.remove("about__tab-selected");
+        // hide dish elements
+        aboutDishes.forEach(hideElements);
+    } else if (clickedTab.classList.contains("about__dish")) {
+        // display dish elements
+        aboutDishes.forEach(showElements);
 
-        // app image
-        aboutAppImageElement.classList.remove("about__appImage-hidden");
-        aboutTeamImageElement.classList.remove("about__teamImage-visible");
-    } else if (currentElement.classList.contains("about__tab-team")) {
-        aboutAppTextElements[0].classList.add("about__appText-hidden");
-        aboutAppTextElements[1].classList.add("about__appText-hidden");
+        // hide app elements
+        aboutApps.forEach(hideElements);
+    }
+}
 
-        aboutTeamTextElements[0].classList.add("about__teamText-visible");
-        aboutTeamTextElements[1].classList.add("about__teamText-visible");
+function showElements(element) {
+    // if statement modifies (border only) the class of tab element
+    // else applies to other elements
+    if (element.classList.contains("about__tab")) {
+        element.classList.add("about__tab-selected");
+    } else {
+        element.classList.remove("about__hidden");
+        element.classList.add("about__visible");
+    }
+}
 
-        aboutTabElements[0].classList.remove("about__tab-selected");
-        aboutTabElements[1].classList.add("about__tab-selected");
-
-        // team image
-        aboutAppImageElement.classList.add("about__appImage-hidden");
-        aboutTeamImageElement.classList.add("about__teamImage-visible");
+function hideElements(element) {
+    // if statement modifies (border only) the class of tab element
+    // else applies to other elements
+    if (element.classList.contains("about__tab")) {
+        element.classList.remove("about__tab-selected");
+    } else {
+        element.classList.remove("about__visible");
+        element.classList.add("about__hidden");
     }
 }
