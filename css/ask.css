@@ -59,6 +59,8 @@
     .ask__button-example {
         top: var(--spacing-l);
         right: var(--spacing-l);
+        bottom: auto;
+        left: auto;
     }
 }
 
