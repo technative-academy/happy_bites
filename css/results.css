@@ -18,11 +18,19 @@
 }
 
 .results__item {
-    background: var(--colour-background-white);
+    background: var(--colour-background-light);
     color: var(--colour-text-dark);
     padding: var(--spacing-l);
     border: 1px solid var(--colour-background-light);
     border-radius: var(--border-radius-l);
+}
+
+.results__item-title {
+    color: var(--colour-secondary);
+}
+
+.results__item-description {
+    line-height: 1.5;
 }
 
 .results__show-more {
