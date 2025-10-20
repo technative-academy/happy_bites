@@ -1,5 +1,8 @@
 class Shop {
     constructor() {
+        this.currentPage = 1;
+        this.currentSort = "title-a-z";
+        this.results = [];
         this.searchContainer = document.querySelector(".search");
         if (this.searchContainer) {
             this.searchInput =
@@ -9,12 +12,17 @@ class Shop {
             this.searchResultCount = this.searchContainer.querySelector(
                 ".search__result-count"
             );
+            this.sortInput =
+                this.searchContainer.querySelector(".search__sort");
             this.loading =
                 this.searchContainer.querySelector(".search__loading");
 
             this.productsContainer = document.querySelector(".products");
             this.productsList =
                 this.productsContainer.querySelector(".products__list");
+            this.showMoreButton = this.productsContainer.querySelector(
+                "#show-more-products-button"
+            );
         }
     }
 
@@ -28,6 +36,8 @@ class Shop {
             debounceTimeout = setTimeout(() => this.search(), 500);
         });
         this.searchButton.addEventListener("click", (e) => this.search(e));
+        this.sortInput.addEventListener("change", () => this.search());
+        this.showMoreButton.addEventListener("click", () => this.moreResults());
         this.checkInput();
         this.search();
     }
@@ -47,8 +57,20 @@ class Shop {
             this.productsList.removeChild(this.productsList.lastChild);
         }
 
+        const pageSize = 5;
+
+        const sort = this.sortInput.value;
+        if (sort !== this.currentSort) {
+            this.currentSort = sort;
+            this.currentPage = 1;
+            this.results = [];
+            this.showMoreButton.classList.remove("is-hidden");
+            this.showMoreButton.classList.add("is-visible");
+        }
+        const APIsort = this.getAPISortValue(sort);
+
         // The API url
-        const url = `https://ai-project.technative.dev.f90.co.uk/products/happybites`;
+        const url = `https://ai-project.technative.dev.f90.co.uk/products/happybites?sort=${APIsort}&page-size=${pageSize}&page=${this.currentPage}`;
         try {
             const response = await fetch(url);
             if (!response.ok) {
@@ -56,11 +78,18 @@ class Shop {
             }
 
             const json = await response.json();
-            // saving the products to a data variable
-            const data = json.products;
+            // saving the products to this.results
+            if (this.currentPage === 1) {
+                this.results = json.products;
+            } else {
+                this.results = this.results.concat(json.products);
+            }
 
             // passing data down to proccessProducts
-            this.processProducts(data);
+            this.processProducts(
+                this.results,
+                this.shouldReverseResults(sort, APIsort)
+            );
             this.loading.classList.remove("is-loading");
         } catch (error) {
             console.error(error.message);
@@ -68,7 +97,45 @@ class Shop {
         }
     }
 
-    processProducts(data) {
+    getAPISortValue(sort) {
+        if (sort === "title-a-z" || sort === "title-z-a") {
+            return "title";
+        }
+        if (sort === "price-low" || sort === "price-high") {
+            return "price";
+        }
+        if (sort === "rating-low" || sort == "rating-high") {
+            return "rating";
+        }
+    }
+
+    shouldReverseResults(sort, APIsort) {
+        if (APIsort === "title" && sort === "title-z-a") {
+            return true;
+        }
+        if (APIsort === "price" && sort === "price-high") {
+            return true;
+        }
+        if (APIsort === "rating" && sort === "rating-low") {
+            return true;
+        }
+        return false;
+    }
+
+    moreResults() {
+        this.currentPage += 1;
+        this.search();
+
+        if (this.currentPage === 2) {
+            this.showMoreButton.classList.add("is-hidden");
+        }
+    }
+
+    processProducts(data, reverseResults = false) {
+        let productsData = data;
+        if (reverseResults) {
+            productsData = productsData.reverse();
+        }
         const searchTerm = this.searchInput.value.toLowerCase();
         const filteredProducts = data.filter(
             (product) =>
@@ -85,7 +152,6 @@ class Shop {
         }
 
         filteredProducts.forEach((product) => {
-            console.log(product.image);
             const productsItem = document.createElement("div");
             productsItem.classList.add("products__item");
             this.productsList.appendChild(productsItem);
