@@ -202,7 +202,7 @@
 }
 
 @media (min-width: 600px) {
-    .header__title {
+    .header__subtitle {
         font-size: var(--font-size-subheading);
     }
 }
