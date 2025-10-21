@@ -108,7 +108,7 @@ class Shop {
 
             const productsItemStars = document.createElement("p");
             productsItemStars.classList.add("products__item-stars");
-            productsItemStars.textContent = "⭐".repeat(product.stars);
+            productsItemStars.textContent = " ⭐ ".repeat(product.stars);
             productsItem.appendChild(productsItemStars);
 
             const productsItemPrice = document.createElement("p");
