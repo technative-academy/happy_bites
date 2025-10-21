@@ -18,8 +18,9 @@
 }
 
 .products__item {
-    background: var(--colour-background-white);
+    background: var(--colour-background-light);
     color: var(--colour-text-dark);
+    line-height: 1.5;
     padding: var(--spacing-l);
     border: 1px solid var(--colour-background-light);
     border-radius: var(--border-radius-l);
@@ -31,8 +32,20 @@
     }
 }
 
+.products__item-title {
+    color: var(--colour-secondary);
+}
+
 .products__item-image {
     width: 100%;
+}
+
+.products__item-stars {
+    font-size: 1.2rem;
+}
+
+.products__item-price {
+    font-weight: 600;
 }
 
 .products__show-more {
