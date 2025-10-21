@@ -3,16 +3,45 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Buy the brains | Ask the Brains</title>
+        <title>Buy yummy desserts | HappyBites</title>
         <link rel="stylesheet" href="../css/style.css" />
+        <link rel="icon" type="image/x-icon" href="../images/icons/cake.svg" />
         <script type="module" defer src="../js/script.js"></script>
+        <script type="module" defer src="../js/header.js"></script>
     </head>
     <body>
         <header class="header">
             <div class="header__content">
-                <div class="header__logo">
-                    <img src="../images/logo.png" alt="Ask the brains" />
+                <img
+                    class="header__logo"
+                    src="../images/logo.png"
+                    alt="Happy Bites logo, showing a rabbit standing next to a slice of cake"
+                />
+                <div class="burger__menu">
+                    <p class="burger__label">MENU</p>
+                    <img
+                        src="../images/icons/burger.png"
+                        alt="burger menu icon"
+                        class="burger__icon"
+                        id="burgerOpen"
+                    />
                 </div>
+                <nav class="burger" id="burgerMenu">
+                    <div class="burger__links">
+                        <a href="#" class="burger__close" id="burgerClose"
+                            ><img
+                                src="./images/icons/close.png"
+                                alt="Close menu"
+                                class="burger__image"
+                        /></a>
+                        <a href="../" class="burger__link">Home</a>
+                        <a href="../about/" class="burger__link">About</a>
+                        <a href="../ask/" class="burger__link">Ask</a>
+                        <a href="./" class="burger__link burger__link-active"
+                            >Shop</a
+                        >
+                    </div>
+                </nav>
                 <nav class="header__nav">
                     <a href="../" class="header__link">Home</a>
                     <a href="../about/" class="header__link">About</a>
@@ -23,10 +52,9 @@
                 </nav>
             </div>
             <div class="header__titles">
-                <h1 class="header__title">Buy the brains</h1>
+                <h1 class="header__title">Happiness in Every Bite</h1>
                 <p class="header__subtitle">
-                    We need to shift some of this stuff so we can continue to
-                    operate, please help us
+                    Grab a bite of happiness — stay for the sweetness.
                 </p>
             </div>
         </header>
@@ -43,10 +71,23 @@
                     </button>
                 </div>
                 <div class="search__footer">
-                    <p class="search__result-count"></p>
                     <select class="search__sort">
-                        <option>Sort by: Price (low to high)</option>
+                        <option value="title-a-z">Sort by: Title (A-Z)</option>
+                        <option value="title-z-a">Sort by: Title (Z-A)</option>
+                        <option value="price-low">
+                            Sort by: Price (Low to High)
+                        </option>
+                        <option value="price-high">
+                            Sort by: Price (High to Low)
+                        </option>
+                        <option value="rating-high">
+                            Sort by: Rating (High to Low)
+                        </option>
+                        <option value="rating-low">
+                            Sort by: Rating (Low to High)
+                        </option>
                     </select>
+                    <p class="search__result-count"></p>
                 </div>
                 <p class="search__loading">Loading...</p>
             </section>
@@ -54,7 +95,12 @@
                 <h2 class="products__title">Products</h2>
                 <div class="products__list"></div>
                 <div class="products__show-more">
-                    <button class="button button--primary">Show more</button>
+                    <button
+                        class="button button--primary button--show-more"
+                        id="show-more-products-button"
+                    >
+                        Show more
+                    </button>
                 </div>
             </section>
         </main>

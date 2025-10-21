@@ -9,6 +9,8 @@
     border-radius: var(--border-radius-s);
     cursor: pointer;
     transition: all 0.25s;
+    font-weight: 600;
+    font-family: var(--font-family-body);
 }
 
 .button:disabled {
@@ -17,22 +19,22 @@
 }
 
 .button--primary {
-    border: 1px solid var(--colour-primary);
-    background: var(--colour-primary);
+    border: 2px solid var(--colour-secondary);
+    background: var(--colour-secondary);
     color: var(--colour-text-light);
 }
 
 .button--primary:hover {
     background: var(--colour-background-white);
-    color: var(--colour-primary);
+    color: var(--colour-secondary);
 }
 
 .button--secondary {
     background: transparent;
-    border: 1px solid var(--colour-background-light);
-    color: var(--colour-primary);
+    border: 2px solid var(--colour-background-light);
+    color: var(--colour-secondary);
 }
 
 .button--secondary:hover {
-    border-color: var(--colour-primary);
+    border-color: var(--colour-secondary);
 }

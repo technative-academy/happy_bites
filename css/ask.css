@@ -24,23 +24,57 @@
     font-size: var(--font-size-body);
     font-family: var(--font-family-body);
     line-height: 1.5;
+    padding-left: 2em;
+}
+
+.ask__input:focus,
+.ask__input:active {
+    outline: 2px solid var(--colour-secondary);
+}
+
+.ask__input-icon {
+    width: 20px;
+    height: 20px;
+    z-index: 1;
+    position: absolute;
+    left: 10px;
+    top: 22px;
 }
 
 .ask__button-example {
     position: absolute;
     z-index: 2;
-    right: var(--spacing-l);
-    top: var(--spacing-l);
+    left: var(--spacing-l);
+    bottom: var(--spacing-l);
     background: none;
     border: none;
     cursor: pointer;
     opacity: 1;
     transition: opacity 0.25s;
+    color: var(--colour-text-dark);
+    font-family: var(--font-family-body);
+}
+
+@media (min-width: 600px) {
+    .ask__button-example {
+        top: var(--spacing-l);
+        right: var(--spacing-l);
+        bottom: auto;
+        left: auto;
+    }
 }
 
 .ask__button-example.is-hidden {
     opacity: 0;
     pointer-events: none;
+}
+
+.ask__button-reset.is-hidden {
+    display: none;
+}
+
+.ask__button-reset.is-visible {
+    display: inline-block;
 }
 
 .ask__footer {

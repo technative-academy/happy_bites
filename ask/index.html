@@ -3,19 +3,48 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Ask | Ask the Brains</title>
+        <title>Ask | HappyBites</title>
         <link rel="stylesheet" href="../css/style.css" />
+        <link rel="icon" type="image/x-icon" href="../images/icons/cake.svg" />
         <script type="module" defer src="../js/script.js"></script>
+        <script type="module" defer src="../js/header.js"></script>
     </head>
     <body>
         <header class="header">
             <div class="header__content">
-                <div class="header__logo">
-                    <img src="../images/logo.png" alt="Ask the brains" />
+                <img
+                    class="header__logo"
+                    src="../images/logo.png"
+                    alt="Happy Bites logo, showing a rabbit standing next to a slice of cake"
+                />
+                <div class="burger__menu">
+                    <p class="burger__label">MENU</p>
+                    <img
+                        src="../images/icons/burger.png"
+                        alt="burger menu icon"
+                        class="burger__icon"
+                        id="burgerOpen"
+                    />
                 </div>
+                <nav class="burger" id="burgerMenu">
+                    <div class="burger__links">
+                        <a href="#" class="burger__close" id="burgerClose"
+                            ><img
+                                src="../images/icons/close.png"
+                                alt="Close menu"
+                                class="burger__image"
+                        /></a>
+                        <a href="../" class="burger__link">Home</a>
+                        <a href="../about" class="burger__link">About</a>
+                        <a href="./" class="burger__link burger__link-active"
+                            >Ask</a
+                        >
+                        <a href="../shop/" class="burger__link">Shop</a>
+                    </div>
+                </nav>
                 <nav class="header__nav">
                     <a href="../" class="header__link">Home</a>
-                    <a href="../about/" class="header__link">About</a>
+                    <a href="../about" class="header__link">About</a>
                     <a href="./" class="header__link header__link--active"
                         >Ask</a
                     >
@@ -23,10 +52,10 @@
                 </nav>
             </div>
             <div class="header__titles">
-                <h1 class="header__title">Ask the brains</h1>
+                <h1 class="header__title">Bake It Happen</h1>
                 <p class="header__subtitle">
-                    Post an open-ended question here and see some suggestions
-                    from our specially trained AI...
+                    Ask for dessert ideas - perfect for leftover ingredients,
+                    parties, or any sweet craving!
                 </p>
             </div>
         </header>
@@ -36,6 +65,11 @@
                     >Ask your question</label
                 >
                 <div class="ask__input-wrapper">
+                    <img
+                        class="ask__input-icon"
+                        src="../images/icons/arrow.svg"
+                        alt="Arrow icon"
+                    />
                     <textarea
                         id="question"
                         class="ask__input"
@@ -48,7 +82,7 @@
                     <div class="ask__buttons">
                         <div class="buttons">
                             <button
-                                class="button button--secondary ask__button-reset"
+                                class="button button--secondary ask__button-reset is-hidden"
                             >
                                 Ask a new question
                             </button>
@@ -66,7 +100,9 @@
                 <h2 class="results__title">Results</h2>
                 <div class="results__list"></div>
                 <div class="results__show-more">
-                    <button class="button button--primary">Show more</button>
+                    <button class="button button--primary ask__button-show">
+                        Show more
+                    </button>
                 </div>
             </section>
         </main>
