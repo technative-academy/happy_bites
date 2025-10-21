@@ -61,7 +61,7 @@ class Ask {
         e.preventDefault();
         console.log("setting example");
         this.askInput.value =
-            "Tell me about some of the best things I could see with a telescope from Brighton (assuming it ever stops raining)";
+            "What is a yummy dessert I could make with chocolate and bread?";
         this.checkInput();
     }
 
