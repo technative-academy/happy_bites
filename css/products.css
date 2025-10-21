@@ -58,3 +58,11 @@
     padding: var(--spacing-l);
     text-align: center;
 }
+
+.button--show-more.is-hidden {
+    display: none;
+}
+
+.button--show-more.is-visible {
+    display: inline-block;
+}

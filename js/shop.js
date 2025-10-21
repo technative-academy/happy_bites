@@ -1,5 +1,10 @@
 class Shop {
     constructor() {
+        // keeping track of search parameters
+        this.currentPage = 1;
+        this.currentSort = "title-a-z";
+        this.currentSearch = "";
+        this.results = [];
         this.searchContainer = document.querySelector(".search");
         if (this.searchContainer) {
             this.searchInput =
@@ -9,12 +14,17 @@ class Shop {
             this.searchResultCount = this.searchContainer.querySelector(
                 ".search__result-count"
             );
+            this.sortInput =
+                this.searchContainer.querySelector(".search__sort");
             this.loading =
                 this.searchContainer.querySelector(".search__loading");
 
             this.productsContainer = document.querySelector(".products");
             this.productsList =
                 this.productsContainer.querySelector(".products__list");
+            this.showMoreButton = this.productsContainer.querySelector(
+                "#show-more-products-button"
+            );
         }
     }
 
@@ -28,6 +38,8 @@ class Shop {
             debounceTimeout = setTimeout(() => this.search(), 500);
         });
         this.searchButton.addEventListener("click", (e) => this.search(e));
+        this.sortInput.addEventListener("change", () => this.search());
+        this.showMoreButton.addEventListener("click", () => this.moreResults());
         this.checkInput();
         this.search();
     }
@@ -40,15 +52,34 @@ class Shop {
         if (e) e.preventDefault();
 
         this.loading.classList.add("is-loading");
-        this.productsContainer.classList.remove("is-shown");
         this.searchResultCount.textContent = "";
 
-        while (this.productsList.firstChild) {
-            this.productsList.removeChild(this.productsList.lastChild);
+        const pageSize = 5;
+
+        const sort = this.sortInput.value;
+        const sortChanged = sort !== this.currentSort;
+        const search = this.searchInput.value;
+        const searchChanged = search !== this.currentSearch;
+        // resetting state when search or sort changes
+        if (sortChanged || searchChanged) {
+            this.currentPage = 1;
+            this.results = [];
+            this.showMoreButton.classList.remove("is-hidden");
+            this.showMoreButton.classList.add("is-visible");
+        }
+        this.currentSort = sort;
+        this.currentSearch = search;
+        // the sort value to be used in the api url
+        const APIsort = this.getAPISortValue(sort);
+
+        // hiding show more button if page is greater than 1
+        if (this.currentPage > 1) {
+            this.showMoreButton.classList.add("is-hidden");
+            this.showMoreButton.classList.remove("is-visible");
         }
 
         // The API url
-        const url = `https://ai-project.technative.dev.f90.co.uk/products/happybites`;
+        const url = `https://ai-project.technative.dev.f90.co.uk/products/happybites?sort=${APIsort}&page-size=${pageSize}&page=${this.currentPage}`;
         try {
             const response = await fetch(url);
             if (!response.ok) {
@@ -56,11 +87,18 @@ class Shop {
             }
 
             const json = await response.json();
-            // saving the products to a data variable
-            const data = json.products;
+            // handling pagiation
+            if (this.currentPage === 1) {
+                this.results = json.products;
+            } else {
+                this.results = this.results.concat(json.products);
+            }
 
             // passing data down to proccessProducts
-            this.processProducts(data);
+            this.processProducts(
+                this.results,
+                this.shouldReverseResults(sort, APIsort)
+            );
             this.loading.classList.remove("is-loading");
         } catch (error) {
             console.error(error.message);
@@ -68,7 +106,44 @@ class Shop {
         }
     }
 
-    processProducts(data) {
+    //converting sort value to api equivalent
+    getAPISortValue(sort) {
+        if (sort === "title-a-z" || sort === "title-z-a") {
+            return "title";
+        }
+        if (sort === "price-low" || sort === "price-high") {
+            return "price";
+        }
+        if (sort === "rating-low" || sort == "rating-high") {
+            return "rating";
+        }
+    }
+
+    //checking if api supports current sort
+    shouldReverseResults(sort, APIsort) {
+        if (APIsort === "title" && sort === "title-z-a") {
+            return true;
+        }
+        if (APIsort === "price" && sort === "price-high") {
+            return true;
+        }
+        if (APIsort === "rating" && sort === "rating-low") {
+            return true;
+        }
+        return false;
+    }
+
+    // loading more products
+    moreResults() {
+        this.currentPage += 1;
+        this.search();
+    }
+
+    processProducts(data, reverseResults) {
+        let productsData = data;
+        if (reverseResults) {
+            productsData = productsData.reverse();
+        }
         const searchTerm = this.searchInput.value.toLowerCase();
         const filteredProducts = data.filter(
             (product) =>
@@ -84,8 +159,11 @@ class Shop {
             this.productsContainer.classList.remove("is-shown");
         }
 
+        while (this.productsList.firstChild) {
+            this.productsList.removeChild(this.productsList.lastChild);
+        }
+
         filteredProducts.forEach((product) => {
-            console.log(product.image);
             const productsItem = document.createElement("div");
             productsItem.classList.add("products__item");
             this.productsList.appendChild(productsItem);

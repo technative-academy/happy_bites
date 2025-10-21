@@ -72,7 +72,20 @@
                 </div>
                 <div class="search__footer">
                     <select class="search__sort">
-                        <option>Sort by: Price (low to high)</option>
+                        <option value="title-a-z">Sort by: Title (A-Z)</option>
+                        <option value="title-z-a">Sort by: Title (Z-A)</option>
+                        <option value="price-low">
+                            Sort by: Price (Low to High)
+                        </option>
+                        <option value="price-high">
+                            Sort by: Price (High to Low)
+                        </option>
+                        <option value="rating-high">
+                            Sort by: Rating (High to Low)
+                        </option>
+                        <option value="rating-low">
+                            Sort by: Rating (Low to High)
+                        </option>
                     </select>
                     <p class="search__result-count"></p>
                 </div>
@@ -82,7 +95,12 @@
                 <h2 class="products__title">Products</h2>
                 <div class="products__list"></div>
                 <div class="products__show-more">
-                    <button class="button button--primary">Show more</button>
+                    <button
+                        class="button button--primary button--show-more"
+                        id="show-more-products-button"
+                    >
+                        Show more
+                    </button>
                 </div>
             </section>
         </main>
