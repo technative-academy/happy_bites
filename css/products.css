@@ -38,6 +38,7 @@
 
 .products__item-image {
     width: 100%;
+    border-radius: var(--border-radius-m);
 }
 
 .products__item-stars {
