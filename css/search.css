@@ -1,3 +1,5 @@
+/* Search for products pages */
+
 .search {
     padding: var(--spacing-xl) var(--spacing-l);
     text-align: left;
@@ -34,6 +36,7 @@
     outline: 2px solid var(--colour-secondary);
 }
 
+/* Search button */
 .search__submit {
     padding-left: var(--spacing-xl);
     padding-right: var(--spacing-xl);
@@ -52,6 +55,8 @@
         flex-direction: row;
     }
 }
+
+/* Products sort */
 
 .search__sort {
     background-color: #fff;

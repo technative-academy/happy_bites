@@ -17,6 +17,8 @@
     gap: var(--spacing-l);
 }
 
+/* Product Item */
+
 .products__item {
     background: var(--colour-background-light);
     color: var(--colour-text-dark);
@@ -32,6 +34,7 @@
     }
 }
 
+/* Product item details */
 .products__item-title {
     color: var(--colour-secondary);
 }
@@ -49,6 +52,7 @@
     font-weight: 600;
 }
 
+/* Show more button */
 .products__show-more {
     margin-top: var(--spacing-l);
     padding: var(--spacing-l);
