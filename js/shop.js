@@ -142,10 +142,10 @@ class Shop {
     processProducts(data, reverseResults) {
         let productsData = data;
         if (reverseResults) {
-            productsData = productsData.reverse();
+            productsData = productsData.toReversed();
         }
         const searchTerm = this.searchInput.value.toLowerCase();
-        const filteredProducts = data.filter(
+        const filteredProducts = productsData.filter(
             (product) =>
                 product.title.toLowerCase().includes(searchTerm) ||
                 product.description.toLowerCase().includes(searchTerm)
