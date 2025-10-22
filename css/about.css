@@ -1,0 +1,63 @@
+:root {
+    --about-tab-border: 1px solid grey;
+}
+
+.about__main {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.about__h3 {
+    font-size: var(--font-size-heading);
+}
+
+.about__content,
+.about__tabs {
+    font-size: var(--font-size-body);
+    font-family: var(--font-family-body);
+}
+
+.about__tabs {
+    display: flex;
+    justify-content: center;
+}
+
+.about__tab {
+    padding: var(--spacing-m);
+    border-bottom: var(--about-tab-border);
+}
+
+.about__tab-selected {
+    border-top: var(--about-tab-border);
+    border-right: var(--about-tab-border);
+    border-left: var(--about-tab-border);
+    border-bottom: none;
+}
+
+.about__content {
+    padding: var(--spacing-m);
+    justify-content: center;
+}
+
+/* image */
+
+.about__image {
+    padding: var(--spacing-m);
+    aspect-ratio: 2 / 1.5;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* app css classes for both image and text */
+.about__app {
+    display: block;
+}
+
+.about__visible {
+    display: block;
+}
+
+.about__hidden {
+    display: none;
+}
